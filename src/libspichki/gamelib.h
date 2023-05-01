@@ -19,4 +19,6 @@ struct player
 };
 typedef struct player player;
 
+heap* getPiles();
+
 player* getPlayerPile();
