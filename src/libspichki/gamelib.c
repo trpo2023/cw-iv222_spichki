@@ -14,7 +14,7 @@ heap* getPiles()
         scanf("%s", strPile);
         pile_status[i].name = toupper(
                 strPile[0]); // Записываю имя кучи из строки в структуру
-        for (int i = 1; i <= strlen(strPile);
+        for (int i = 1; i <= (int)strlen(strPile);
              i++) // Весь этот for чтобы скопировать из строки число в number
         {
             number[j] = strPile[i];
@@ -44,7 +44,7 @@ player* getPlayerPile()
     strPile[0] = toupper(strPile[0]); /* Корректируем ввод на случай, если куча
                                        была написана с маленькой буквы*/
     move->nameOfPile = strPile[0]; // Вытаскиваем из строки имя кучи
-    for (int i = 1; i <= strlen(strPile); // Записываю число из строки в number
+    for (int i = 1; i <= (int)strlen(strPile); // Записываю число из строки в number
          i++) {
         number[j] = strPile[i];
         j++;

@@ -18,7 +18,7 @@ CTEST(TEST_Input, number_input)
     char number[maxstr] = {};
     int stock = 0;
     int j = 0;
-    for (int i = 1; i <= strlen(strPile); i++) {
+    for (int i = 1; i <= (int)strlen(strPile); i++) {
         number[j] = strPile[i];
         j++;
     }
@@ -36,7 +36,7 @@ CTEST(TEST_Input, full_input)
     int j = 0;
     int real = 0;
     name = toupper(strPile[0]);
-    for (int i = 1; i <= strlen(strPile); i++) {
+    for (int i = 1; i <= (int)strlen(strPile); i++) {
         number[j] = strPile[i];
         j++;
     }
@@ -63,7 +63,7 @@ CTEST(TEST_Player, scan_player_items)
     char strPile[] = "c15";
     char number[maxstr] = {};
     int j = 0;
-    for (int i = 1; i <= strlen(strPile); i++) {
+    for (int i = 1; i <= (int)strlen(strPile); i++) {
         number[j] = strPile[i];
         j++;
     }
