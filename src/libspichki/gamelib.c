@@ -88,7 +88,7 @@ void game(heap* pile_status)
         for (int i = 0; i <= 3; i++) // Обнуляем кучу, если ушли в минус
             if (pile_status[i].stock < 0)
                 pile_status[i].stock = 0;
-    free(move);
+        free(move);
     }
     printf("\nПобеда игрока %c\n", playername); // Кучи кончились, игрок победил
 }

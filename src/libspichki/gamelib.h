@@ -4,14 +4,14 @@
 #include <stdlib.h>
 #include <string.h>
 #define maxstr 255
-/* Структура которая хранит название кучи и количество предметов в ней. Будет
- хранить актуальные данные о кучах*/
+
 struct heap {
     char name;
     int stock;
 };
+/* Структура которая хранит название кучи и количество предметов в ней. Будет
+ хранить актуальные данные о кучах*/
 typedef struct heap heap;
-
 
 struct player {
     char nameOfPile;
