@@ -22,3 +22,5 @@ typedef struct player player;
 heap* getPiles();
 
 player* getPlayerPile();
+
+void game(heap* pile_status);

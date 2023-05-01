@@ -43,3 +43,23 @@ player* getPlayerPile()
 
     return move;
 }
+
+void game(heap* pile_status)
+{
+    char playername = '2';
+    while ((pile_status[0].stock + pile_status[1].stock + pile_status[2].stock) > 0)
+    {
+        if (playername == '1') playername = '2'; else playername = '1';
+        printf("| %c%d | %c%d | %c%d |\n", pile_status[0].name,pile_status[0].stock,pile_status[1].name,pile_status[1].stock,pile_status[2].name,pile_status[2].stock);
+        printf("Ход игрока %c\n", playername);
+        player* move = getPlayerPile();
+        for (int i = 0;i<=3;i++)
+            {
+                if (move->nameOfPile == pile_status[i].name) pile_status[i].stock -= move->countOfItems;
+            }
+        for (int i = 0;i<=3;i++)
+        if (pile_status[i].stock < 0) pile_status[i].stock = 0;
+        
+    }
+    printf("\nПобеда игрока %c\n", playername);
+}
