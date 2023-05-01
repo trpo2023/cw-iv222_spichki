@@ -46,3 +46,29 @@ CTEST(TEST_Input, full_input)
         real = 1;
     ASSERT_EQUAL(1, real);
 }
+
+CTEST(TEST_Player, scan_player_heap)
+{
+    player* move = (player*)calloc(1, sizeof(player));
+    char strPile[] = "c15";
+    strPile[0] = toupper(strPile[0]);
+    move->nameOfPile = strPile[0];
+    ASSERT_EQUAL(strPile[0],move->nameOfPile);
+    free(move);
+}
+
+CTEST(TEST_Player, scan_player_items)
+{
+    player* move = (player*)calloc(1, sizeof(player));
+    char strPile[] = "c15";
+    char number[maxstr] = {};
+    int j = 0;
+    for (int i = 1; i <= strlen(strPile); i++) {
+        number[j] = strPile[i];
+        j++;
+    }
+    j = 0;
+    move->countOfItems = atoi(number);
+    ASSERT_EQUAL(15,move->countOfItems);
+    free(move);
+}
