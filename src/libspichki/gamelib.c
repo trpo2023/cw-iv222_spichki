@@ -44,7 +44,8 @@ player* getPlayerPile()
     strPile[0] = toupper(strPile[0]); /* Корректируем ввод на случай, если куча
                                        была написана с маленькой буквы*/
     move->nameOfPile = strPile[0]; // Вытаскиваем из строки имя кучи
-    for (int i = 1; i <= (int)strlen(strPile); // Записываю число из строки в number
+    for (int i = 1;
+         i <= (int)strlen(strPile); // Записываю число из строки в number
          i++) {
         number[j] = strPile[i];
         j++;
