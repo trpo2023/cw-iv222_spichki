@@ -1,19 +1,17 @@
 #pragma once
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #define maxstr 255
 
-struct heap
-{
+struct heap {
     char name;
     int stock;
 };
 typedef struct heap heap;
 
-struct player
-{
+struct player {
     char nameOfPile;
     int countOfItems;
 };
