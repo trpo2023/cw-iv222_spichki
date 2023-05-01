@@ -53,7 +53,7 @@ CTEST(TEST_Player, scan_player_heap)
     char strPile[] = "c15";
     strPile[0] = toupper(strPile[0]);
     move->nameOfPile = strPile[0];
-    ASSERT_EQUAL(strPile[0],move->nameOfPile);
+    ASSERT_EQUAL(strPile[0], move->nameOfPile);
     free(move);
 }
 
@@ -69,6 +69,6 @@ CTEST(TEST_Player, scan_player_items)
     }
     j = 0;
     move->countOfItems = atoi(number);
-    ASSERT_EQUAL(15,move->countOfItems);
+    ASSERT_EQUAL(15, move->countOfItems);
     free(move);
 }
