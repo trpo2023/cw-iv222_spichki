@@ -1,2 +1,9 @@
-a.out
-.vscode
+*~
+*main
+*output
+*bin/
+*.d
+*.o
+*.a
+*.vscode/
+*.out
