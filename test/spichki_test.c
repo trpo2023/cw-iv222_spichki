@@ -15,7 +15,7 @@ CTEST(TEST_Input, name_input)
 CTEST(TEST_Input, number_input)
 {
     char strPile[] = "b110";
-    char number[maxstr] = {};
+    char number[MAXSTR] = {};
     int stock = 0;
     int j = 0;
     for (int i = 1; i <= (int)strlen(strPile); i++) {
@@ -30,7 +30,7 @@ CTEST(TEST_Input, number_input)
 CTEST(TEST_Input, full_input)
 {
     char strPile[] = "b110";
-    char number[maxstr] = {};
+    char number[MAXSTR] = {};
     char name;
     int stock = 0;
     int j = 0;
@@ -61,7 +61,7 @@ CTEST(TEST_Player, scan_player_items)
 {
     player* move = (player*)calloc(1, sizeof(player));
     char strPile[] = "c15";
-    char number[maxstr] = {};
+    char number[MAXSTR] = {};
     int j = 0;
     for (int i = 1; i <= (int)strlen(strPile); i++) {
         number[j] = strPile[i];
