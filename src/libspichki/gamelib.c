@@ -63,7 +63,7 @@ heap* getPiles()
 void interface(heap* pile_status)
 {
     system("clear");
-    printf("[Для выхода нажмите q]\n");
+    printf(" [Для выхода нажмите q] \n");
     printf("|");
     for (int i = 0; i < 3; i++) {
         if (pile_status[i].stock != 0)
