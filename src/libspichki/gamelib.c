@@ -72,18 +72,15 @@ void interface(heap* pile_status)
     printf("\n");
 }
 
-player* getPlayerPile()
+player* getData(char* strPile)
 {
     player* move = (player*)calloc(
             1,
             sizeof(player)); /* Выделяю память для структуры, в которую запишу
                               данные в нужной форме, считанные с клавиатуры*/
-    char strPile[MAXSTR] = ""; /* Объявляю строку, в которой будет хранится
-                                считанная с клавы строка*/
     char number[MAXSTR] = {}; /* Объявляю строку, куда буду помещать число
                                написанное строкой*/
     int j = 0; // Счетчик для прохождения по number
-    scanf("%s", strPile);
     strPile[0] = toupper(strPile[0]); /* Корректируем ввод на случай, если куча
                                        была написана с маленькой буквы*/
     move->nameOfPile = strPile[0]; // Вытаскиваем из строки имя кучи
@@ -103,6 +100,9 @@ player* getPlayerPile()
 
 void game(heap* pile_status)
 {
+    char strPile[MAXSTR]; /* Объявляю строку, в которой будет хранится
+                                считанная с клавы строка*/
+    char* str;
     char playername
             = '2'; /* playername - имя текущего игрока. Начинаю со второго, т.к
                     в начале цикла буду делать переход на следующего игрока.*/
@@ -115,16 +115,11 @@ void game(heap* pile_status)
             playername = '2';
         else
             playername = '1';
-        printf("| %c%d | %c%d | %c%d |\n",
-               pile_status[0].name,
-               pile_status[0].stock,
-               pile_status[1].name,
-               pile_status[1].stock,
-               pile_status[2].name,
-               pile_status[2].stock); /* Этот страшный printf выводит все
-                                       имеющиеся кучи*/
+
+        interface(pile_status);
         printf("Ход игрока %c\n", playername);
-        player* move = getPlayerPile(); // Здесь игрок пишет с клавиатуры кучу
+        str = errorCheck(strPile, pile_status);
+        player* move = getData(str); // Здесь игрок пишет с клавиатуры кучу
         for (int i = 0; i <= 3; i++) {
             if (move->nameOfPile == pile_status[i].name)
                 pile_status[i].stock -= move->countOfItems;
@@ -134,5 +129,6 @@ void game(heap* pile_status)
                 pile_status[i].stock = 0;
         free(move);
     }
+    system("clear");
     printf("\nПобеда игрока %c\n", playername); // Кучи кончились, игрок победил
 }
