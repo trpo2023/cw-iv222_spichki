@@ -1,9 +1,10 @@
 #pragma once
 #include <ctype.h>
 #include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
-#define maxstr 255
+#define MAXSTR 255
 
 struct heap {
     char name;
@@ -21,6 +22,8 @@ struct player {
  из этой структуры получены от игрока и используются только для того, чтобы
  отнять нужное количество(countOfItems) из кучи(nameOfPile)*/
 typedef struct player player;
+
+void waitInput(char* str);
 /*Функция запрашивает с игрока название куч и количество предметов в них.
  * Возвращает массив куч*/
 heap* getPiles();
