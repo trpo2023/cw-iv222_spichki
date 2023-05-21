@@ -72,6 +72,103 @@ void interface(heap* pile_status)
     printf("\n");
 }
 
+char* errorCheck(char* strPile, heap* pile_status)
+{
+    waitInput(strPile);
+    int i = 1;
+    int num = 0;
+    while (i != (int)strlen(strPile)) {
+        if ((toupper(strPile[0]) < 65) || (toupper(strPile[0]) > 90)) {
+            interface(pile_status);
+            printf("\nКуча задана не корректно формату [имя][кол-во], "
+                   "повторите попытку: ");
+            waitInput(strPile);
+            continue;
+            i = 1;
+        }
+        if (((toupper(strPile[0]) != 'A') || (pile_status[0].stock <= 0))
+            && ((toupper(strPile[0]) != 'B') || (pile_status[1].stock <= 0))
+            && ((toupper(strPile[0]) != 'C') || pile_status[2].stock <= 0)) {
+            system("clear");
+            if (strPile[0] == 'q' && strPile[1] == '\n')
+                exit(0);
+            interface(pile_status);
+            if ((toupper(strPile[0]) > 67) && (toupper(strPile[0]) < 91))
+                printf("\nТакой кучи нет, повторите попытку: ");
+            else
+                printf("\nКуча задана не корректно формату [имя][кол-во], "
+                       "повторите попытку: ");
+            waitInput(strPile);
+            i = 1;
+        }
+        while (strPile[i] == ' ')
+            i++;
+        while (strPile[i] == '0' && num == 0) {
+            i++;
+            if (strPile[i] == '\n') {
+                system("clear");
+                interface(pile_status);
+                printf("\nВы не можете забрать меньше одной спички, повторите "
+                       "попытку: ");
+                waitInput(strPile);
+                i = 1;
+            }
+        }
+        if ((strPile[i] == '-') && (num == 0)) {
+            system("clear");
+            interface(pile_status);
+            printf("\nВы не можете забрать меньше одной спички, повторите "
+                   "попытку: ");
+            waitInput(strPile);
+            i = 1;
+        }
+        if ((strPile[i] == '-') && (num == 1)) {
+            system("clear");
+            interface(pile_status);
+            printf("\nКуча задана не корректно формату [имя][кол-во], "
+                   "повторите попытку: ");
+            waitInput(strPile);
+            i = 1;
+        }
+
+        if (((strPile[i] >= '1') && (strPile[i] <= '9'))
+            || ((strPile[i] == '0') && (num == 1))) {
+            num = 1;
+            i++;
+        }
+        if (strPile[i] == '\n')
+            break;
+        if (((strPile[i] < '0') || (strPile[i] > '9')) && (num == 1)) {
+            system("clear");
+            interface(pile_status);
+            printf("\nКуча задана не корректно формату [имя][кол-во], "
+                   "повторите попытку: ");
+            waitInput(strPile);
+            i = 1;
+        }
+        if ((strPile[i] == '0') && (strPile[i + 1] == '\n') && (num == 0)
+            && (strPile[i] != ' ')) {
+            system("clear");
+            interface(pile_status);
+            printf("\nВы не можете забрать меньше одной спички, повторите "
+                   "попытку: ");
+            waitInput(strPile);
+            i = 1;
+        }
+        if (num == 0) {
+            system("clear");
+            interface(pile_status);
+            printf("\nКуча задана не корректно формату [имя][кол-во], "
+                   "повторите попытку: ");
+            waitInput(strPile);
+            i = 1;
+        }
+    }
+
+    system("clear");
+    return strPile;
+}
+
 player* getData(char* strPile)
 {
     player* move = (player*)calloc(
