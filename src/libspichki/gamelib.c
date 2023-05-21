@@ -1,32 +1,75 @@
 #include <libspichki/gamelib.h>
 
+void waitInput(char* str)
+{
+    int q = 0;
+    __fpurge(stdin);
+    for (q = 0; (str[q] = getchar()) != '\n'; q++)
+        ;
+    str[q] = '\n';
+    if (str[0] == 'q' && str[1] == '\n') {
+        system("clear");
+        exit(0);
+    }
+}
+
 heap* getPiles()
 {
     int pile_count = 3; // Количество куч
     heap* pile_status = (heap*)calloc(
             pile_count,
             sizeof(heap)); // Динамически выделяю память под массив структур куч
-    char strPile[maxstr] = " "; // Сюда пойдет вся строка с ввода
-    char number[maxstr] = {}; // Сюда пойдут только числа после первой буквы
-    int j = 0;
-    for (int i = 0; i < pile_count; i++) {
-        printf("Задайте %d-ю кучу (пример:B35): ", i + 1);
-        scanf("%s", strPile);
-        pile_status[i].name = toupper(
-                strPile[0]); // Записываю имя кучи из строки в структуру
-        for (int i = 1; i <= (int)strlen(strPile);
-             i++) // Весь этот for чтобы скопировать из строки число в number
-        {
-            number[j] = strPile[i];
-            j++;
+    pile_status[0].name = 'A';
+    pile_status[1].name = 'B';
+    pile_status[2].name = 'C';
+    char count[MAXSTR];
+    int num = 0;
+    int v = 0;
+    printf("Сколько должно быть предметов в куче?: ");
+    int err = 0;
+    while (err == 0) {
+        system("clear");
+        waitInput(count);
+        printf("%s", count);
+        while (count[v] != '\n') {
+            if ((count[v] < '0') || (count[v] > '9')) {
+                v = -1;
+                system("clear");
+                printf("Число задано не корректно, повторите попытку: ");
+                waitInput(count);
+            }
+            v++;
         }
-        j = 0;
-        pile_status[i].stock
-                = atoi(number); /* Приводим число из строки number в тип int и
-                                 записываем в структуру */
-        printf("\n");
+        num = atoi(count);
+        if (num == 0) {
+            printf("Число задано не корректно, повторите попытку: ");
+            err = 0;
+        }
+        if (num < 0) {
+            printf("Число должно быть больше нуля и при этом не превышать "
+                   "максимальное значение(1874919423), повторите попытку: ");
+            err = 0;
+        }
+        if (num > 0)
+            err = 1;
     }
+    num = atoi(count);
+
+    for (int i = 0; i < pile_count; i++)
+        pile_status[i].stock = num;
     return pile_status;
+}
+
+void interface(heap* pile_status)
+{
+    system("clear");
+    printf("[Для выхода нажмите q]\n");
+    printf("|");
+    for (int i = 0; i < 3; i++) {
+        if (pile_status[i].stock != 0)
+            printf(" %c%d |", pile_status[i].name, pile_status[i].stock);
+    }
+    printf("\n");
 }
 
 player* getPlayerPile()
@@ -35,9 +78,9 @@ player* getPlayerPile()
             1,
             sizeof(player)); /* Выделяю память для структуры, в которую запишу
                               данные в нужной форме, считанные с клавиатуры*/
-    char strPile[maxstr] = ""; /* Объявляю строку, в которой будет хранится
+    char strPile[MAXSTR] = ""; /* Объявляю строку, в которой будет хранится
                                 считанная с клавы строка*/
-    char number[maxstr] = {}; /* Объявляю строку, куда буду помещать число
+    char number[MAXSTR] = {}; /* Объявляю строку, куда буду помещать число
                                написанное строкой*/
     int j = 0; // Счетчик для прохождения по number
     scanf("%s", strPile);
