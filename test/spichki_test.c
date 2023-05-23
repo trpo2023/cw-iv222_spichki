@@ -4,71 +4,101 @@
 #define CTEST_SEGFAULT
 #define CTEST_COLOR_OK
 
-CTEST(TEST_Input, name_input)
+CTEST(TEST_Input_count_1, getPiles)
 {
-    char strPile[] = "b110";
-    char name;
-    name = toupper(strPile[0]);
-    ASSERT_EQUAL('B', name);
+    char str[] = "abcdf";
+    ASSERT_EQUAL(NULL, getPiles(str));
 }
 
-CTEST(TEST_Input, number_input)
+CTEST(TEST_Input_count_2, getPiles)
 {
-    char strPile[] = "b110";
-    char number[MAXSTR] = {};
-    int stock = 0;
-    int j = 0;
-    for (int i = 1; i <= (int)strlen(strPile); i++) {
-        number[j] = strPile[i];
-        j++;
-    }
-    j = 0;
-    stock = atoi(number);
-    ASSERT_EQUAL(110, stock);
+    char str[] = "-1";
+    ASSERT_EQUAL(NULL, getPiles(str));
 }
 
-CTEST(TEST_Input, full_input)
+CTEST(TEST_Input_count_3, getPiles)
 {
-    char strPile[] = "b110";
-    char number[MAXSTR] = {};
-    char name;
-    int stock = 0;
-    int j = 0;
-    int real = 0;
-    name = toupper(strPile[0]);
-    for (int i = 1; i <= (int)strlen(strPile); i++) {
-        number[j] = strPile[i];
-        j++;
-    }
-    j = 0;
-    stock = atoi(number);
-    if (name == 'B' && stock == 110)
-        real = 1;
-    ASSERT_EQUAL(1, real);
+    int pile_count = 3;
+    heap* pile_status = (heap*)calloc(pile_count, sizeof(heap));
+    pile_status[0].name = 'A';
+    pile_status[1].name = 'B';
+    pile_status[2].name = 'C';
+    pile_status[0].stock = 30;
+    pile_status[1].stock = 30;
+    pile_status[2].stock = 30;
+    char str[] = "30";
+    ASSERT_EQUAL(NULL, getPiles(str));
+    free(pile_status);
 }
 
-CTEST(TEST_Player, scan_player_heap)
+CTEST(TEST_PLAYER_INPUT_1, errorCheck)
 {
-    player* move = (player*)calloc(1, sizeof(player));
+    int pile_count = 3;
+    heap* pile_status = (heap*)calloc(pile_count, sizeof(heap));
+    pile_status[0].name = 'A';
+    pile_status[1].name = 'B';
+    pile_status[2].name = 'C';
+    pile_status[0].stock = 30;
+    pile_status[1].stock = 30;
+    pile_status[2].stock = 30;
+    char str[] = "kd";
+    ASSERT_EQUAL(NULL, errorCheck(str, pile_status));
+    free(pile_status);
+}
+
+CTEST(TEST_PLAYER_INPUT_2, errorCheck)
+{
+    int pile_count = 2;
+    heap* pile_status = (heap*)calloc(pile_count, sizeof(heap));
+    pile_status[0].name = 'A';
+    pile_status[1].name = 'B';
+    pile_status[0].stock = 30;
+    pile_status[1].stock = 30;
+    char str[] = "C35";
+    ASSERT_EQUAL(NULL, errorCheck(str, pile_status));
+    free(pile_status);
+}
+
+CTEST(TEST_PLAYER_INPUT_3, errorCheck)
+{
+    int pile_count = 3;
+    heap* pile_status = (heap*)calloc(pile_count, sizeof(heap));
+    pile_status[0].name = 'A';
+    pile_status[1].name = 'B';
+    pile_status[2].name = 'C';
+    pile_status[0].stock = 30;
+    pile_status[1].stock = 30;
+    pile_status[2].stock = 30;
+    char str[] = "a-28";
+    ASSERT_EQUAL(NULL, errorCheck(str, pile_status));
+    free(pile_status);
+}
+
+CTEST(TEST_PLAYER_INPUT_4, errorCheck)
+{
+    int pile_count = 3;
+    heap* pile_status = (heap*)calloc(pile_count, sizeof(heap));
+    pile_status[0].name = 'A';
+    pile_status[1].name = 'B';
+    pile_status[2].name = 'C';
+    pile_status[0].stock = 30;
+    pile_status[1].stock = 30;
+    pile_status[2].stock = 30;
+    char str[] = "A28\n";
+    ASSERT_STR(str, errorCheck(str, pile_status));
+    free(pile_status);
+}
+
+CTEST(TEST_HEAP_1, getData)
+{
     char strPile[] = "c15";
-    strPile[0] = toupper(strPile[0]);
-    move->nameOfPile = strPile[0];
-    ASSERT_EQUAL(strPile[0], move->nameOfPile);
-    free(move);
+    player* move = getData(strPile);
+    ASSERT_EQUAL('C', move->nameOfPile);
 }
 
-CTEST(TEST_Player, scan_player_items)
+CTEST(TEST_HEAP_2, getData)
 {
-    player* move = (player*)calloc(1, sizeof(player));
     char strPile[] = "c15";
-    char number[MAXSTR] = {};
-    int j = 0;
-    for (int i = 1; i <= (int)strlen(strPile); i++) {
-        number[j] = strPile[i];
-        j++;
-    }
-    j = 0;
-    move->countOfItems = atoi(number);
+    player* move = getData(strPile);
     ASSERT_EQUAL(15, move->countOfItems);
-    free(move);
 }
