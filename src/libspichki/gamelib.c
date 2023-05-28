@@ -24,13 +24,13 @@ heap* getPiles(char* count)
     int num = 0;
     int v = 0;
     while (count[v] != '\n') {
-	if ((count[v] < '0') || (count[v] > '9')) {
-	    v = -1;
-	    for (int i = 0; i < pile_count; i++)
-		pile_status[i].stock = 0;
-	    return pile_status;
-	}
-	v++;
+        if ((count[v] < '0') || (count[v] > '9')) {
+            v = -1;
+            for (int i = 0; i < pile_count; i++)
+                pile_status[i].stock = 0;
+            return pile_status;
+        }
+        v++;
     }
     num = atoi(count);
     if (num <= 0) {
