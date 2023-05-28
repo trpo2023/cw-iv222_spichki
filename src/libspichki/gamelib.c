@@ -63,8 +63,8 @@ void errorPrint(int code, heap* pile_status, char playername)
     case FORMAT_ERR:
         system("clear");
         interface(pile_status, playername);
-        printf("\nВы не можете забрать меньше одной спички, повторите "
-               "попытку: ");
+        printf("\nКуча задана не корректно формату [имя][кол-во], "
+               "повторите попытку: ");
         break;
     case COUNT_ERR:
         system("clear");
