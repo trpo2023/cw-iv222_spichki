@@ -2,6 +2,7 @@
 
 int main()
 {
+    system("clear");
     char str[MAXSTR];
     char* s;
     heap* pile_status;
@@ -10,7 +11,7 @@ int main()
     printf("Сколько должно быть предметов в куче?: ");
     s = waitInput(str);
     pile_status = getPiles(s);
-    while (pile_status == NULL) {
+    while (pile_status[0].stock == 0) {
         system("clear");
         printf("Число задано не корректно, повторите попытку: ");
         s = waitInput(str);

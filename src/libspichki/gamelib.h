@@ -9,6 +9,7 @@
 #define COUNT_ERR -2
 #define HEAP_ERR -3
 #define SHUTDOWN 1
+#define NUL 0
 
 struct heap {
     char name;

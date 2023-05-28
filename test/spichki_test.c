@@ -4,19 +4,37 @@
 #define CTEST_SEGFAULT
 #define CTEST_COLOR_OK
 
-CTEST(TEST_Input_count_1, getPiles)
+CTEST(TEST_INPUT_COUNT_1, getPiles)
 {
+    int pile_count = 3;
+    heap* pile_status = (heap*)calloc(pile_count, sizeof(heap));
+    pile_status[0].name = 'A';
+    pile_status[1].name = 'B';
+    pile_status[2].name = 'C';
+    pile_status[0].stock = 30;
+    pile_status[1].stock = 30;
+    pile_status[2].stock = 30;
     char str[] = "abcdf";
-    ASSERT_EQUAL(NULL, getPiles(str));
+    ASSERT_EQUAL(0, getPiles(str)[0].stock);
+    free(pile_status);
 }
 
-CTEST(TEST_Input_count_2, getPiles)
+CTEST(TEST_INPUT_COUNT_2, getPiles)
 {
+    int pile_count = 3;
+    heap* pile_status = (heap*)calloc(pile_count, sizeof(heap));
+    pile_status[0].name = 'A';
+    pile_status[1].name = 'B';
+    pile_status[2].name = 'C';
+    pile_status[0].stock = 30;
+    pile_status[1].stock = 30;
+    pile_status[2].stock = 30;
     char str[] = "-1";
-    ASSERT_EQUAL(NULL, getPiles(str));
+    ASSERT_EQUAL(0, getPiles(str)[0].stock);
+    free(pile_status);
 }
 
-CTEST(TEST_Input_count_3, getPiles)
+CTEST(TEST_INPUT_COUNT_3, getPiles)
 {
     int pile_count = 3;
     heap* pile_status = (heap*)calloc(pile_count, sizeof(heap));
@@ -27,7 +45,7 @@ CTEST(TEST_Input_count_3, getPiles)
     pile_status[1].stock = 30;
     pile_status[2].stock = 30;
     char str[] = "30";
-    ASSERT_EQUAL(NULL, getPiles(str));
+    ASSERT_EQUAL(0, getPiles(str)[0].stock);
     free(pile_status);
 }
 
@@ -42,7 +60,7 @@ CTEST(TEST_PLAYER_INPUT_1, errorCheck)
     pile_status[1].stock = 30;
     pile_status[2].stock = 30;
     char str[] = "kd";
-    ASSERT_EQUAL(NULL, errorCheck(str, pile_status));
+    ASSERT_EQUAL(HEAP_ERR, errorCheck(str, pile_status));
     free(pile_status);
 }
 
@@ -55,7 +73,7 @@ CTEST(TEST_PLAYER_INPUT_2, errorCheck)
     pile_status[0].stock = 30;
     pile_status[1].stock = 30;
     char str[] = "C35";
-    ASSERT_EQUAL(NULL, errorCheck(str, pile_status));
+    ASSERT_EQUAL(FORMAT_ERR, errorCheck(str, pile_status));
     free(pile_status);
 }
 
@@ -70,7 +88,7 @@ CTEST(TEST_PLAYER_INPUT_3, errorCheck)
     pile_status[1].stock = 30;
     pile_status[2].stock = 30;
     char str[] = "a-28";
-    ASSERT_EQUAL(NULL, errorCheck(str, pile_status));
+    ASSERT_EQUAL(COUNT_ERR, errorCheck(str, pile_status));
     free(pile_status);
 }
 
@@ -85,7 +103,7 @@ CTEST(TEST_PLAYER_INPUT_4, errorCheck)
     pile_status[1].stock = 30;
     pile_status[2].stock = 30;
     char str[] = "A28\n";
-    ASSERT_STR(str, errorCheck(str, pile_status));
+    ASSERT_EQUAL(NUL, errorCheck(str, pile_status));
     free(pile_status);
 }
 

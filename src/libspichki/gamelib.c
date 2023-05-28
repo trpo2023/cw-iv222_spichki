@@ -27,14 +27,17 @@ heap* getPiles(char* count)
     while (count[v] != '\n') {
         if ((count[v] < '0') || (count[v] > '9')) {
             v = -1;
-
-            return NULL;
+	    for (int i = 0; i < pile_count; i++)
+                pile_status[i].stock = 0;
+            return pile_status;
         }
         v++;
     }
     num = atoi(count);
     if (num <= 0) {
-        return NULL;
+        for (int i = 0; i < pile_count; i++)
+            pile_status[i].stock = 0;
+        return pile_status;
     }
     if (num > 0) {
         for (int i = 0; i < pile_count; i++)
@@ -132,9 +135,9 @@ int errorCheck(char* strPile, heap* pile_status)
         return FORMAT_ERR;
     }
     if (strPile[i] == '\n') {
-        return 0;
+        return NUL;
     }
-    return 0;
+    return NUL;
 }
 
 player* getData(char* strPile)
