@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAXSTR 255
+#define FORMAT_ERR -1
+#define COUNT_ERR -2
+#define HEAP_ERR -3
+#define SHUTDOWN 1
 
 struct heap {
     char name;
@@ -25,18 +29,15 @@ typedef struct player player;
 /*Принимает массив символов, записывает в него значение с клавиатуры и
  * возвращает указатель на него*/
 char* waitInput(char* str);
-/*Функция инициализирует кучи и определяет количество предметов в них. Принимает
- * строку и проверяет ее на ошибки. Возвращает массив куч, если ошибок нет.
- * Возвращает NULL, если ошибки есть. */
+
 heap* getPiles(char* count);
-/*Принимает массив куч и выводит их*/
-void interface(heap* pile_status);
-/*Проверяет строку игрока на ошибки. Принимает указатель на массив символов и
- * массив куч. Возвращает строку, если ошибок нет. Возвращает NULL, если ошибки
- * есть.*/
-char* errorCheck(char* strPile, heap* pile_status);
-/*Функция разбивает строку на структуру кучи. Возвращает кучу*/
+
+void interface(heap* pile_status, char playername);
+
+void errorPrint(int code, heap* pile_status, char playername);
+
+int errorCheck(char* strPile, heap* pile_status);
+
 player* getData(char* strPile);
-/*Реализация игрового процесса,
- * принимает на вход массив куч*/
-void game(heap* pile_status);
+
+void game(char* str, heap* pile_status);
